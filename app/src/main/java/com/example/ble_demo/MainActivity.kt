@@ -38,21 +38,11 @@ class MainActivity : AppCompatActivity() {
         .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
         .build()
 
-    private val stopScanCallback = object : ScanCallback() {
-        @SuppressLint("MissingPermission")
-        override fun onScanResult(callbackType: Int, result: ScanResult) {
-            with(result.device) {
-                Log.i("StopScanCallback", "Scan stopped.")
-            }
-        }
-    }
-
     private val scanCallback = object : ScanCallback() {
         @SuppressLint("MissingPermission")
         override fun onScanResult(callbackType: Int, result: ScanResult) {
             with(result.device) {
                 Log.i("ScanCallback", "Found BLE device! Name: ${name ?: "Unnamed"}, address: $address")
-                bleScanner.stopScan(stopScanCallback)
             }
         }
     }
